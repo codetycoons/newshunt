@@ -7,14 +7,14 @@ export class ErrorBoundary extends Component {
     }
 
     componentDidCatch() {
-        this.setState(prevState =>({isError : !prevState.isError}))
+        this.setState(prevState => ({ isError: !prevState.isError }))
     }
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {this.state.isError ? 'Something Went Wrong' : this.props.children}
-            </div>
+            </React.Fragment>
         )
     }
 }

@@ -1,10 +1,8 @@
 import React from 'react'
-
+import classes from './Header.module.css'
 function Header() {
     return (
-        <div>
-            
-        </div>
+        <div className={classes.header}>NEWSHUNT</div>
     )
 }
 
