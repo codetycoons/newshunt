@@ -14,7 +14,7 @@ function NewsFeed({ activeOp, NavOptionObj }) {
 
   if (activeOp == 0) {
     url =
-      "everything?q=Apple&from=2021-06-09&sortBy=popularity&apiKey=" +
+      "everything?q=Apple&from=2021-06-31&sortBy=popularity&apiKey=" +
       NEWS_API_KEY;
   } else {
     url =
