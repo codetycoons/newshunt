@@ -1,0 +1,20 @@
+.Profile img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.Profile {
+  padding: 0 5px;
+}
+
+.Profile .date {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.Profile .time {
+  font-weight: 100;
+  font-size: 12px;
+  color: #797978;
+}

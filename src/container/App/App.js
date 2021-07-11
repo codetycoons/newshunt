@@ -1,33 +1,40 @@
-import React, { Component } from 'react'
-import ErrorBoundary from '../../component/ErrorBoundary/ErrorBoundary'
-import Header from '../../component/Header/Header'
-import Home from '../../container/Home/Home'
-import './App.css'
-const HeaderPage = () => (
-  <ErrorBoundary >
-    <Header />
-  </ErrorBoundary>
-)
-
-const HomePage = () => (
-  <ErrorBoundary>
-    <Home />
-  </ErrorBoundary>
-)
+import React, { Component } from "react";
+import Layout from "../Layout/Layout";
+import {
+  Link,
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
 export class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>
-          <HeaderPage />
-        </div>
-        <div className="marg_btm_10">
-          <HomePage />
-        </div>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Layout} />
+            <Route
+              path="/description"
+              exact
+              render={(props) => {
+                console.log("locatin", props);
+                return <h1>{props.location.state.description}</h1>;
+              }}
+            />
+            <Route
+              render={() => {
+                return <h1>page not found..</h1>;
+              }}
+            />
+          </Switch>
+          {/* <Redirect from="*" to="/404" /> */}
+        </Router>
+        ;{/* <Layout /> */}
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default App
+export default App;

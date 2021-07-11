@@ -1,0 +1,27 @@
+.NewsArticle {
+  background: white;
+  padding: 10px;
+  box-shadow: 2px 2px 5px 1px #cac7c5;
+  border-radius: 5px;
+  margin: 10px;
+  width: 480px;
+  height: 180px;
+  display: flex;
+  cursor: pointer;
+}
+
+.NewsArticle:hover {
+  transform: scale(1.03);
+  transition: all 0.2s linear;
+}
+
+.NewsArticle img {
+  height: -webkit-fill-available;
+  width: 40%;
+  border-radius: 10px;
+}
+
+.NewsArticle .content {
+  display: flex;
+  padding: 10px;
+}
