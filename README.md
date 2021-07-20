@@ -1,6 +1,7 @@
 ## Available Pages
 
 - Header
+- Profile Page
 - Navigation Bar
 - News Article Listing
 - News Description
