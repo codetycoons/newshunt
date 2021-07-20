@@ -4,6 +4,13 @@ import NavigationBar from "../NavigationBar/NavigationBar";
 import classes from "./Layout.module.css";
 import NewsFeed from "../NewsFeed/NewsFeed";
 import Header from "../Header/Header";
+import {
+  TRENDING,
+  NAVIGATION_OPTIONS_RESPONSE,
+  navigationOptions,
+} from "../../constant";
+import { useFetch } from "../../Hooks/useFetch";
+import { NEWS_API_KEY } from "../../common/common";
 
 const SideBar = (props) => (
   <ErrorBoundary>
@@ -17,63 +24,43 @@ const FeedPage = (props) => (
   </ErrorBoundary>
 );
 
-let NavOptions = [
-  // {
-  //   name: "Home",
-  //   isActive: true,
-  // },
-  {
-    name: "Trending",
-    isActive: true,
-  },
-  {
-    name: "Entertainment",
-    isActive: false,
-  },
-  {
-    name: "Business",
-    isActive: false,
-  },
-  {
-    name: "Sports",
-    isActive: false,
-  },
-  {
-    name: "Health",
-    isActive: false,
-  },
-  {
-    name: "Science",
-    isActive: false,
-  },
-  {
-    name: "Technology",
-    isActive: false,
-  },
-];
-
 function Layout() {
-  const [NavOptionObj, setOption] = useState(NavOptions);
-  const [activeOp, setActiveOption] = useState(0);
+  const [navOptionObj, setNaviagtionOption] = useState(navigationOptions);
+  const [activeOption, setActiveOption] = useState(1);
+  let url = "";
 
   function toggleNavOption(index) {
-    console.log("index", index);
-    let newOp = [...NavOptionObj];
-    for (var key in newOp) {
-      if (newOp[key].isActive) {
-        newOp[key].isActive = false;
-      }
-    }
-    newOp[index].isActive = true;
-    setActiveOption(index);
-    setOption(newOp);
+    setNaviagtionOption(
+      navOptionObj.map((op) => {
+        op.id === index ? (op.isActive = !op.isActive) : (op.isActive = false);
+        setActiveOption(index);
+        return { ...op };
+      })
+    );
   }
+
+  activeOption === TRENDING
+    ? (url =
+        "everything?q=Apple&from=2021-06-19&sortBy=popularity&apiKey=" +
+        NEWS_API_KEY)
+    : (url =
+        "top-headlines/sources?category=" +
+        navOptionObj[activeOption - 1].name +
+        "&apiKey=" +
+        NEWS_API_KEY);
+
+  const { response, error, loading } = useFetch(url, "GET");
+
   return (
     <React.Fragment>
       <Header />
       <div className={classes.Layout}>
-        <SideBar NavOptionObj={NavOptionObj} onClick={toggleNavOption} />
-        <FeedPage activeOp={activeOp} NavOptionObj={NavOptionObj} />
+        <SideBar navOptionObj={navOptionObj} onClick={toggleNavOption} />
+        <FeedPage
+          activeOption={activeOption}
+          isLoading={loading}
+          response={response}
+        />
       </div>
     </React.Fragment>
   );

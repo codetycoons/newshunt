@@ -19,7 +19,6 @@ export class App extends Component {
               path="/description"
               exact
               render={(props) => {
-                console.log("locatin", props);
                 return <h1>{props.location.state.description}</h1>;
               }}
             />
